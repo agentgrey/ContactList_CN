@@ -2,10 +2,17 @@
 import Style from "./home.module.css";
 /** ------------ IMPORTING ROUTER DEPENDENCIES------------ **/
 import {Link} from "react-router-dom";
+/** ------------ IMPORTING CONTEXT HOOKS ------------ **/
+import {useValue} from "../../Context/context";
 
 
 
 function Home() {
+
+    const {contactList, deleteContact} = useValue();
+
+
+
     return (
         <div className={Style.container}>
             <table>
@@ -19,16 +26,18 @@ function Home() {
                     </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Name</td>
-                    <td>Email</td>
-                    <td>Phone</td>
-                    <td>
-                        <Link to="/edit" className={Style.edit_btn}>Edit</Link>
-                        <Link className={Style.dlt_btn}>Delete</Link>
-                    </td>
-                </tr>
+                {contactList.map((contact, index)=> (
+                    <tr key={index}>
+                        <td>{index+1}.</td>
+                        <td>{contact.name}</td>
+                        <td>{contact.email}</td>
+                        <td>{contact.phone}</td>
+                        <td>
+                            <Link to={`edit/${contact.id}`} className={Style.edit_btn}>Edit</Link>
+                            <Link onClick={()=>deleteContact(contact.id)} className={Style.dlt_btn}>Delete</Link>
+                        </td>
+                    </tr>
+                ))}
                 </tbody>
             </table>
         </div>

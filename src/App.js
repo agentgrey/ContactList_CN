@@ -6,6 +6,8 @@ import Add from "./Pages/AddContact/add";
 import Edit from "./Pages/EditContact/edit";
 /** ------------ IMPORTING ROUTER ------------ **/
 import {RouterProvider, createBrowserRouter} from 'react-router-dom';
+/** ------------ IMPORTING CUSTOM CONTEXT ------------ **/
+import CustomContext from './Context/context';
 
 
 
@@ -17,13 +19,15 @@ function App() {
       children : [
         {path: '/', element: <Home/>},
         {path: '/add', element: <Add/>},
-        {path: '/edit', element: <Edit/>}
+        {path: '/edit/:id', element: <Edit/>}
       ]}
   ]);
 
   return (
     <>
+    <CustomContext>
       <RouterProvider router={router}/>
+    </CustomContext>
     </>
   );
 }
