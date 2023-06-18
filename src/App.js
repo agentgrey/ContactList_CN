@@ -8,6 +8,9 @@ import Edit from "./Pages/EditContact/edit";
 import {RouterProvider, createBrowserRouter} from 'react-router-dom';
 /** ------------ IMPORTING CUSTOM CONTEXT ------------ **/
 import CustomContext from './Context/context';
+/** ------------ IMPORTING TOAST DEPENDENCIES------------ **/
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -26,6 +29,7 @@ function App() {
   return (
     <>
     <CustomContext>
+      <ToastContainer />
       <RouterProvider router={router}/>
     </CustomContext>
     </>

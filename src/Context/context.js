@@ -1,5 +1,7 @@
 /** ------------ IMPORTING HOOKS ------------ **/
 import { createContext, useContext, useState , useEffect , useRef } from "react";
+/** ------------ IMPORTING TOAST ------------ **/
+import {toast} from 'react-toastify';
 
 // create the contextAPI
 const contactApi = createContext();
@@ -14,15 +16,18 @@ function CustomContext({children}) {
 
     // Storing the contact list in the local state
     const [contactList, setContactList] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const nameRef = useRef();
     const emailRef = useRef();
     const numberRef = useRef();
 
 /** ------------ Function to fetch data from the api ------------ **/
     const fetchContactList = async() =>{
+        setIsLoading(true);
         let data = await fetch('https://jsonplaceholder.typicode.com/users/');
         let contact = await data.json();
         setContactList(contact);
+        setIsLoading(false);
     }
 /** ------------ Function to delete contact from the list ------------ **/
     const deleteContact = (id) => {
@@ -30,9 +35,8 @@ function CustomContext({children}) {
         if (index !== -1) {
           let newContactList = [...contactList];
           newContactList.splice(index, 1);
-        //   Displyed the toast messages
-        //   toast.success("Contact Deleted Successfully !");
-        setContactList(newContactList);
+          toast.success("Contact Deleted Successfully!");
+          setContactList(newContactList);
         }
     };
 /** ------------ Function to clear the input fields ------------ **/
@@ -51,7 +55,7 @@ function CustomContext({children}) {
     return (
         <>
             <contactApi.Provider value={{contactList, setContactList, deleteContact, handleClear,
-                                    nameRef, emailRef, numberRef}}>
+                                    nameRef, emailRef, numberRef, isLoading}}>
                 {children}
             </contactApi.Provider>
         </>

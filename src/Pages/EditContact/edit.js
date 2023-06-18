@@ -4,6 +4,8 @@ import Style from "./edit.module.css";
 import {Link, useParams, useNavigate} from "react-router-dom";
 /** ------------ IMPORTING CONTEXT HOOKS ------------ **/
 import {useValue} from "../../Context/context";
+/** ------------ IMPORTING TOAST ------------ **/
+import {toast} from 'react-toastify';
 
 
 
@@ -24,7 +26,7 @@ function Edit() {
         const number = numberRef.current.value;
 
         if (name === currentContact.name && email === currentContact.email && number === currentContact.phone) {
-            
+            toast.info("Contact Unchanged.");
         } else {
             const updatedContact = {
                 ...currentContact,
@@ -36,6 +38,7 @@ function Edit() {
                 }
                 return contact;
             });
+            toast.success("Contact Updated Successfully!");
             setContactList(updatedList);
         }
         navigate('/');  

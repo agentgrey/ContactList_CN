@@ -1,5 +1,7 @@
 /** ------------ IMPORTING CSS ------------ **/
 import Style from "./home.module.css";
+/** ------------ IMPORTING COMPONENTS ------------ **/
+import Loader from "../Loader/loader";
 /** ------------ IMPORTING ROUTER DEPENDENCIES------------ **/
 import {Link} from "react-router-dom";
 /** ------------ IMPORTING CONTEXT HOOKS ------------ **/
@@ -9,9 +11,11 @@ import {useValue} from "../../Context/context";
 
 function Home() {
 
-    const {contactList, deleteContact} = useValue();
+    const {contactList, deleteContact, isLoading} = useValue();
 
+    if(isLoading) return <Loader/>
 
+    
 
     return (
         <div className={Style.container}>

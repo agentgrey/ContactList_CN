@@ -4,6 +4,8 @@ import Style from "./add.module.css";
 import {useValue} from "../../Context/context";
 /** ------------ IMPORTING ROUTER DEPENDENCIES------------ **/
 import {useNavigate} from 'react-router-dom';
+/** ------------ IMPORTING TOAST ------------ **/
+import {toast} from 'react-toastify';
 
 
 function Add() {
@@ -20,15 +22,16 @@ function Add() {
         const email = emailRef.current.value;
         const number = numberRef.current.value;
 
-        const isPresent = contactList.find(contact => contact.number === parseInt(number) && number)
+        const isPresent = contactList.find(contact => contact.phone === number)
         if(isPresent) {
-
+            toast.info("Contact Exists!");
         } else {
             const newContactList = [...contactList];
             newContactList.push({
                 id: contactList[contactList.length-1].id +1,
                 name, email, phone:number
             });
+            toast.success("Contact Added Successfully!");
             setContactList(newContactList);
         }
         navigate('/');
