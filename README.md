@@ -1,4 +1,13 @@
-# Getting Started with Create React App
+# Contact List
+ContactList_CN is a web application for managing a contact list. It allows users to create, view, edit, and delete contacts.
+
+## Fatures
+- Add a new contact with a name, email, and phone number.
+- View a list of contacts with their details.
+- Edit the information of an existing contact.
+- Delete a contact from the list.
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
